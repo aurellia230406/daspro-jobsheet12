@@ -1,29 +1,37 @@
 import java.util.Scanner;
+
 public class Tugas03 {
-    public static int hitungTotalRekursif(int n) {
-        if (n == 1) { 
-            return 1;
-        }
-        return n + hitungTotalRekursif(n - 1);
-    }
-    public static int hitungTotalIteratif(int n) {
+    public static int totalIterative(int[] numbers) {
         int total = 0;
-        for (int i = 1; i <= n; i++) {
-            total += i;
+        for (int num : numbers) {
+            total += num;
         }
         return total;
     }
+
+    public static int totalRecursive(int[] numbers, int length) {
+        if (length == 0) {
+            return 0;
+        }
+        return numbers[length - 1] + totalRecursive(numbers, length - 1);
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Masukkan jumlah angka yang ingin dihitung (N): ");
         int n = scanner.nextInt();
 
-        int totalRekursif = hitungTotalRekursif(n);
-        System.out.println("Hasil menggunakan fungsi rekursif: " + totalRekursif);
+        int[] numbers = new int[n];
 
-        int totalIteratif = hitungTotalIteratif(n);
-        System.out.println("Hasil menggunakan fungsi iteratif: " + totalIteratif);
+        for (int i = 0; i < n; i++) {
+            System.out.print("Masukkan angka ke-" + (i + 1) + ": ");
+            numbers[i] = scanner.nextInt();
+        }
+
+        int total = totalIterative(numbers);
+
+        System.out.println("Total dari " + n + " angka yang dimasukkan adalah: " + total);
 
         scanner.close();
     }
